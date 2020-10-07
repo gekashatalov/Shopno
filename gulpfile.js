@@ -55,7 +55,14 @@ function html() {
 
 function img() {
     return gulp.src('./src/img/**/*')
-        .pipe(gulp.dest('./build/img'));
+        .pipe(gulp.dest('./build/img'))
+        .pipe(gulpif(isSync, browserSync.stream()));
+}
+
+function scripts() {
+    return gulp.src('./src/js/**/*')
+        .pipe(gulp.dest('./build/js'))
+        .pipe(gulpif(isSync, browserSync.stream()));
 }
 
 function watch() {
@@ -73,6 +80,8 @@ function watch() {
     gulp.watch('./src/**/*.html', html);
     gulp.watch('./smartgrid.js', grid);
     gulp.watch('./src/img/**/*', img);
+    gulp.watch('./src/js/**/*', scripts);
+
 }
 
 function grid(done) {
@@ -83,7 +92,7 @@ function grid(done) {
 }
 
 let build = gulp.series(clear,
-    gulp.parallel(styles, html, img));
+    gulp.parallel(styles, html, img, scripts));
 
 gulp.task('build', build);
 gulp.task('grid', grid);

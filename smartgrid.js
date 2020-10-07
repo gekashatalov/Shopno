@@ -1,10 +1,10 @@
 module.exports = {
     outputStyle: 'less',
     columns: 12,
-    offset : '20px',
+    offset: '20px',
     mobileFirst: false,
     container: {
-        maxWidth: "960px",
+        maxWidth: "1040px",
         fields: "10px",
     },
     breakPoints: {
